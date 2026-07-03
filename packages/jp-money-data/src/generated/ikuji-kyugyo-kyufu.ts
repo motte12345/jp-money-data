@@ -1,0 +1,76 @@
+// このファイルは scripts/build-package.mjs が data/*.json から自動生成します。手で編集しないこと。
+// 生成物は .gitignore せずコミットする（差分レビュー可能にするため。設計書§11）。
+import type { Dataset } from '../core/types'
+import type { IkujiKyugyoKyufuValues } from '../datasets/ikuji-kyugyo-kyufu'
+
+export const ikujiKyugyoKyufu: Dataset<IkujiKyugyoKyufuValues> = {
+  "meta": {
+    "id": "ikuji-kyugyo-kyufu",
+    "name": "育児休業給付・出産関連給付の上限額",
+    "nameEn": "Childcare leave benefits and childbirth allowances (caps)",
+    "category": "labor",
+    "description": "育児休業給付金（67%/50%）・出生時育児休業給付金・出生後休業支援給付金の月額上限と、出産育児一時金の額。育休給付上限は毎年8月改定。",
+    "unit": "MIXED",
+    "updateCycle": "yearly",
+    "updateMonth": 8,
+    "sources": [
+      {
+        "title": "育児休業給付の内容と支給申請手続",
+        "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000135090_00001.html",
+        "publisher": "厚生労働省・雇用保険法",
+        "license": "PDL-1.0",
+        "accessedAt": "2026-07-03"
+      },
+      {
+        "title": "出産育児一時金について",
+        "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/shussan/index.html",
+        "publisher": "厚生労働省・健康保険法",
+        "license": "PDL-1.0",
+        "accessedAt": "2026-07-03"
+      }
+    ],
+    "revisionHistory": [
+      {
+        "effectiveOn": "2025-08-01",
+        "summary": "令和7年8月改定（休業開始時賃金日額上限の改定に伴い育休給付の月額上限を改定）",
+        "sourceUrl": "https://www.mhlw.go.jp/content/001520021.pdf"
+      },
+      {
+        "effectiveOn": "2023-04-01",
+        "summary": "出産育児一時金を42万円から50万円へ引上げ（対象外分娩は48.8万円）",
+        "sourceUrl": null
+      }
+    ],
+    "notes": [
+      "月額上限は休業開始時賃金日額上限16,110円（令和7年8月・30歳以上45歳未満相当）から導出（円未満切り捨て）: 67%×30日=323,811／50%×30日=241,650／出生時67%×28日=302,223（302,223.6を切捨て）／支援13%×28日=58,640（58,640.4を切捨て）。",
+      "出産育児一時金は健康保険の給付（産科医療補償制度対象分娩50万円・対象外48.8万円）で更新周期が異なる（2023-04改定）。",
+      "2026-08-01改定値（7月下旬公表）を確定次第、現行スライスに effectiveTo を入れて新スライスを追加する。"
+    ]
+  },
+  "slices": [
+    {
+      "effectiveFrom": "2025-08-01",
+      "effectiveTo": null,
+      "sources": [
+        {
+          "title": "令和7年8月からの基本手当日額等の変更（賃金日額上限の根拠）",
+          "url": "https://www.mhlw.go.jp/content/001520021.pdf",
+          "publisher": "厚生労働省",
+          "license": "PDL-1.0",
+          "accessedAt": "2026-07-03"
+        }
+      ],
+      "verifiedAt": "2026-07-03",
+      "values": {
+        "wageDailyCap": 16110,
+        "wageDailyFloor": 3014,
+        "ikukyuMonthlyCap67": 323811,
+        "ikukyuMonthlyCap50": 241650,
+        "shusseijiCap28d": 302223,
+        "shienCap28d": 58640,
+        "shussanIchijikin": 500000,
+        "shussanIchijikinNoHosho": 488000
+      }
+    }
+  ]
+} as const

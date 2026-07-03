@@ -1,0 +1,5 @@
+# SPA フォールバック（/* /index.html 200）は置かない。
+# 全ルートは vite-react-ssg で静的HTML化済みなので、実在URLは対応する .html を配信し、
+# 存在しないURLは public/404.html が Cloudflare により 404 ステータスで配信される。
+# （`/* /index.html 200` を置くと存在しないURLまで空の器を 200 で返し、
+#   Google が薄い「幽霊ページ」を大量にインデックスする原因になるため。書き戻さないこと）

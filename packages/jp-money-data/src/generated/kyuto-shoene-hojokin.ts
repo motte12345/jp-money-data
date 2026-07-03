@@ -1,0 +1,96 @@
+// このファイルは scripts/build-package.mjs が data/*.json から自動生成します。手で編集しないこと。
+// 生成物は .gitignore せずコミットする（差分レビュー可能にするため。設計書§11）。
+import type { Dataset } from '../core/types'
+import type { KyutoShoeneHojokinValues } from '../datasets/kyuto-shoene-hojokin'
+
+export const kyutoShoeneHojokin: Dataset<KyutoShoeneHojokinValues> = {
+  "meta": {
+    "id": "kyuto-shoene-hojokin",
+    "name": "給湯省エネ・住宅省エネ補助金（給湯機器）",
+    "nameEn": "Water heater energy-saving subsidies",
+    "category": "subsidy",
+    "description": "高効率給湯器の導入補助（給湯省エネ2026事業・みらいエコ住宅2026事業など）。基本額・性能加算・撤去加算・申請期限・受付状況を収録。",
+    "unit": "JPY",
+    "updateCycle": "on-revision",
+    "updateMonth": null,
+    "sources": [
+      {
+        "title": "給湯省エネ2026事業",
+        "url": "https://kyutou-shoene2026.meti.go.jp/about/",
+        "publisher": "経済産業省・資源エネルギー庁",
+        "license": "PDL-1.0",
+        "accessedAt": "2026-07-03"
+      },
+      {
+        "title": "住宅省エネ2026キャンペーン（みらいエコ住宅2026事業）",
+        "url": "https://mirai-eco2026.mlit.go.jp/",
+        "publisher": "国土交通省",
+        "license": "PDL-1.0",
+        "accessedAt": "2026-07-03"
+      }
+    ],
+    "revisionHistory": [
+      {
+        "effectiveOn": "2025-11-28",
+        "summary": "給湯省エネ2026事業の対象着工開始（予約2026-11-16まで／申請2026-12-31まで）",
+        "sourceUrl": "https://kyutou-shoene2026.meti.go.jp/about/"
+      }
+    ],
+    "notes": [
+      "予算消化で早期終了あり。applyDeadline を過ぎた補助金は利用側で「終了・後継事業確認中」表示に切替える運用（鮮度管理）。",
+      "みらいエコ住宅2026のエコジョーズ/エコフィールは単体申請不可（他の要件化工事と合計5万円以上が条件）。試算では「条件付き」注記を必須。",
+      "補助額・期限は年度事業ごとに変わる。四半期（1/4/7/10月）で受付状況を確認する。"
+    ]
+  },
+  "slices": [
+    {
+      "effectiveFrom": "2025-11-28",
+      "effectiveTo": null,
+      "sources": [
+        {
+          "title": "給湯省エネ2026事業",
+          "url": "https://kyutou-shoene2026.meti.go.jp/about/",
+          "publisher": "経済産業省・資源エネルギー庁",
+          "license": "PDL-1.0",
+          "accessedAt": "2026-07-03"
+        }
+      ],
+      "verifiedAt": "2026-07-03",
+      "values": {
+        "programs": [
+          {
+            "id": "kyuto-shoene-2026-ecocute",
+            "programName": "給湯省エネ2026事業",
+            "targetHeater": "ecocute",
+            "baseYen": 70000,
+            "performanceBonusYen": 30000,
+            "removalBonus": [
+              {
+                "fromHeater": "electric-tank",
+                "yen": 20000
+              }
+            ],
+            "applyDeadline": "2026-12-31",
+            "status": "open",
+            "note": "予約2026-11-16まで／申請2026-12-31まで。予算570億円・消化で早期終了。着工2025-11-28以降。戸建2台まで。",
+            "sourceUrl": "https://kyutou-shoene2026.meti.go.jp/about/",
+            "verifiedAt": "2026-07-03"
+          },
+          {
+            "id": "mirai-eco-2026-ecojozu",
+            "programName": "みらいエコ住宅2026事業",
+            "targetHeater": "gas-ecojozu",
+            "baseYen": 30000,
+            "performanceBonusYen": 0,
+            "removalBonus": [],
+            "applyDeadline": "2026-12-31",
+            "status": "open",
+            "note": "単体申請不可（他の要件化工事と合計5万円以上が条件）。申請期限は公式で要確認。",
+            "sourceUrl": "https://mirai-eco2026.mlit.go.jp/",
+            "verifiedAt": "2026-07-03"
+          }
+        ]
+      }
+    }
+  ]
+} as const

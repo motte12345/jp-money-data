@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "id": "kei-jidosha-zei",
+    "name": "軽自動車税種別割",
+    "nameEn": "Light vehicle tax (kind-based)",
+    "category": "tax",
+    "description": "自家用軽自動車（四輪乗用）の軽自動車税種別割の年額・経年重課と、二輪・原付の排気量区分別年額（全国一律の標準税率）。",
+    "unit": "JPY_PER_YEAR",
+    "updateCycle": "on-revision",
+    "updateMonth": null,
+    "sources": [
+      {
+        "title": "軽自動車税（種別割）の税率",
+        "url": "https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/149767_13.html",
+        "publisher": "総務省・地方税法",
+        "license": "copyright-free-art13",
+        "accessedAt": "2026-07-03"
+      },
+      {
+        "title": "新基準原付について",
+        "url": "https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/shinkijungentsuki.html",
+        "publisher": "総務省",
+        "license": "copyright-free-art13",
+        "accessedAt": "2026-07-03"
+      }
+    ],
+    "revisionHistory": [
+      {
+        "effectiveOn": "2025-04-01",
+        "summary": "新基準原付（総排気量125cc以下・最高出力4.0kW以下）を原付一種と同額（2,000円）に措置（令和7年度改正）",
+        "sourceUrl": null
+      },
+      {
+        "effectiveOn": "2015-04-01",
+        "summary": "2015年4月1日以降に新規検査を受けた四輪乗用自家用の標準税額を10,800円に引上げ",
+        "sourceUrl": null
+      }
+    ],
+    "notes": [
+      "四輪自家用乗用と二輪・原付を収録。営業用・貨物軽は含まない。",
+      "四輪の経年重課（13年超）は heavy13y=12,900円の法定固定額（『約20%増』は概算であり正確な額ではない）。二輪に経年重課はない。",
+      "二輪の区分: 原付一種(〜50cc)2,000／原付二種乙(51〜90cc)2,000／原付二種甲(91〜125cc)2,400／軽二輪(126〜250cc)3,600／小型二輪(251cc〜)6,000。",
+      "税率は全国一律の標準税率。自治体により差はない。"
+    ]
+  },
+  "slices": [
+    {
+      "effectiveFrom": "2015-04-01",
+      "effectiveTo": null,
+      "sources": [
+        {
+          "title": "軽自動車税（種別割）の税率",
+          "url": "https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/149767_13.html",
+          "publisher": "総務省・地方税法",
+          "license": "copyright-free-art13",
+          "accessedAt": "2026-07-03"
+        }
+      ],
+      "verifiedAt": "2026-07-03",
+      "values": {
+        "fourWheelPassenger": { "normal": 10800, "heavy13y": 12900 },
+        "twoWheel": {
+          "brackets": [
+            { "maxCc": 50, "amount": 2000 },
+            { "maxCc": 90, "amount": 2000 },
+            { "maxCc": 125, "amount": 2400 },
+            { "maxCc": 250, "amount": 3600 },
+            { "maxCc": null, "amount": 6000 }
+          ],
+          "shinKijunGentsuki": 2000
+        }
+      }
+    }
+  ]
+}

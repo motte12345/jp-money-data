@@ -1,0 +1,6 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.DS_Store
+# リポジトリ data/ の同期コピー（正本は ../data）
+src/_data/

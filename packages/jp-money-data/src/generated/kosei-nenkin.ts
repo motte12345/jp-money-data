@@ -1,0 +1,60 @@
+// このファイルは scripts/build-package.mjs が data/*.json から自動生成します。手で編集しないこと。
+// 生成物は .gitignore せずコミットする（差分レビュー可能にするため。設計書§11）。
+import type { Dataset } from '../core/types'
+import type { KoseiNenkinValues } from '../datasets/kosei-nenkin'
+
+export const koseiNenkin: Dataset<KoseiNenkinValues> = {
+  "meta": {
+    "id": "kosei-nenkin",
+    "name": "厚生年金保険料率・標準報酬月額の上下限",
+    "nameEn": "Employees' pension insurance rate and standard monthly remuneration bounds",
+    "category": "social-insurance",
+    "description": "厚生年金保険料率（労使合計）と標準報酬月額の上限・下限・等級数。",
+    "unit": "RATE",
+    "updateCycle": "on-revision",
+    "updateMonth": null,
+    "sources": [
+      {
+        "title": "厚生年金保険料額表",
+        "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/ryogaku/ryogakuhyo/index.html",
+        "publisher": "日本年金機構・厚生労働省",
+        "license": "PDL-1.0",
+        "accessedAt": "2026-07-03"
+      }
+    ],
+    "revisionHistory": [
+      {
+        "effectiveOn": "2017-09-01",
+        "summary": "段階的引上げが完了し保険料率が18.3%（労使折半で各9.15%）に固定",
+        "sourceUrl": null
+      }
+    ],
+    "notes": [
+      "率は労使合計（18.3%）。折半後は各9.15%。",
+      "標準報酬月額は第1級88,000円〜第32級650,000円（32等級）。",
+      "厚年の標準報酬月額上限は2027年9月以降の段階引上げが予定されており（要追跡）、確定後に新スライスを追加する。"
+    ]
+  },
+  "slices": [
+    {
+      "effectiveFrom": "2020-09-01",
+      "effectiveTo": null,
+      "sources": [
+        {
+          "title": "厚生年金保険料額表",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/ryogaku/ryogakuhyo/index.html",
+          "publisher": "日本年金機構・厚生労働省",
+          "license": "PDL-1.0",
+          "accessedAt": "2026-07-03"
+        }
+      ],
+      "verifiedAt": "2026-07-03",
+      "values": {
+        "rate": 0.183,
+        "monthlyMin": 88000,
+        "monthlyMax": 650000,
+        "grades": 32
+      }
+    }
+  ]
+} as const

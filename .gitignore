@@ -1,0 +1,14 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.DS_Store
+# パッケージへ複製される data/（正本は repo ルートの data/）
+packages/jp-money-data/data/
+# 生成TS（src/generated/）は .gitignore しない＝差分レビュー可能にするため意図的にコミットする（設計書§11）
+
+# 内部の作業ドキュメント（戦略・SEO文脈を含むため公開リポジトリには含めない。ローカル保持）
+/CLAUDE.md
+/PLAN.md
+/SPEC.md
+/TODO.md
+/KNOWLEDGE.md

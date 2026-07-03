@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "id": "shobyo-teate-params",
+    "name": "傷病手当金の計算パラメータ",
+    "nameEn": "Injury and sickness allowance calculation parameters",
+    "category": "social-insurance",
+    "description": "傷病手当金の日額計算に必要なパラメータ（給付割合2/3・日額換算の除数30・12ヶ月未満特例の全被保険者平均上限・待期日数・通算支給期間）。",
+    "unit": "MIXED",
+    "updateCycle": "yearly",
+    "updateMonth": 4,
+    "sources": [
+      {
+        "title": "病気やケガで会社を休んだとき（傷病手当金）",
+        "url": "https://www.kyoukaikenpo.or.jp/benefit/injury_and_sickness_allowance/index.html",
+        "publisher": "全国健康保険協会（協会けんぽ）・健康保険法",
+        "license": "quasi-govt-quote",
+        "accessedAt": "2026-07-03"
+      }
+    ],
+    "revisionHistory": [
+      {
+        "effectiveOn": "2025-04-01",
+        "summary": "加入12ヶ月未満特例の全被保険者平均額を300,000円から320,000円へ改定（令和7年4月）",
+        "sourceUrl": null
+      },
+      {
+        "effectiveOn": "2022-01-01",
+        "summary": "支給期間を「支給開始日から通算1年6ヶ月」に変更（途中就労の不支給期間は算入しない）",
+        "sourceUrl": null
+      }
+    ],
+    "notes": [
+      "日額 = 支給開始日以前の継続12ヶ月間の標準報酬月額の平均 ÷ 30 × 2/3。",
+      "端数処理（健康保険法99条2項）: ÷30 は10円単位で四捨五入、×2/3 は1円単位で四捨五入。",
+      "計算例（協会けんぽ公表）: 平均170,000円 → ÷30=5,666.67 → 10円処理 5,670円 → ×2/3=3,780円/日。",
+      "待期は連続3日（有給・土日祝を含む）、4日目から支給対象。報酬が支払われた場合は日額との差額調整。",
+      "全被保険者平均額（zenhiHeikinCap）は毎年4月に改定されうる。令和8年4月以降の値は要確認。"
+    ]
+  },
+  "slices": [
+    {
+      "effectiveFrom": "2025-04-01",
+      "effectiveTo": null,
+      "sources": [
+        {
+          "title": "病気やケガで会社を休んだとき（傷病手当金）",
+          "url": "https://www.kyoukaikenpo.or.jp/benefit/injury_and_sickness_allowance/index.html",
+          "publisher": "全国健康保険協会（協会けんぽ）・健康保険法",
+          "license": "quasi-govt-quote",
+          "accessedAt": "2026-07-03"
+        }
+      ],
+      "verifiedAt": "2026-07-03",
+      "values": {
+        "benefitFraction": { "numerator": 2, "denominator": 3 },
+        "dailyDivisor": 30,
+        "zenhiHeikinCap": 320000,
+        "waitingDays": 3,
+        "tsusanMonths": 18
+      }
+    }
+  ]
+}

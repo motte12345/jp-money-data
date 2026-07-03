@@ -1,0 +1,98 @@
+// このファイルは scripts/build-package.mjs が data/*.json から自動生成します。手で編集しないこと。
+// 生成物は .gitignore せずコミットする（差分レビュー可能にするため。設計書§11）。
+import type { Dataset } from '../core/types'
+import type { ShoteiKyufuNissuValues } from '../datasets/shotei-kyufu-nissu'
+
+export const shoteiKyufuNissu: Dataset<ShoteiKyufuNissuValues> = {
+  "meta": {
+    "id": "shotei-kyufu-nissu",
+    "name": "雇用保険 基本手当の所定給付日数",
+    "nameEn": "Employment insurance basic allowance (prescribed benefit days)",
+    "category": "labor",
+    "description": "基本手当の所定給付日数。一般の離職者（被保険者期間別）、特定受給資格者・特定理由離職者（年齢×被保険者期間別）、就職困難者の3類型。",
+    "unit": "DAY",
+    "updateCycle": "on-revision",
+    "updateMonth": null,
+    "sources": [
+      {
+        "title": "基本手当の所定給付日数",
+        "url": "https://www.hellowork.mhlw.go.jp/insurance/insurance_benefitdays.html",
+        "publisher": "厚生労働省（ハローワークインターネットサービス）・雇用保険法",
+        "license": "copyright-free-art13",
+        "accessedAt": "2026-07-03"
+      }
+    ],
+    "revisionHistory": [],
+    "notes": [
+      "一般（自己都合・定年・契約満了等）は被保険者期間のみで決まる（年齢不問）。受給には離職前2年間に被保険者期間12か月以上が必要なため『1年未満』は null。",
+      "特定受給資格者・特定理由離職者（倒産・解雇・雇止め等）は年齢×被保険者期間。受給には離職前1年間に被保険者期間6か月以上が必要。30歳未満は『20年以上』(y20plus)区分が存在しない（null）。",
+      "被保険者期間キー: ippan は under1y(1年未満)/y1to10(1〜10年)/y10to20(10〜20年)/y20plus(20年以上)。tokutei は m6to1y(6か月〜1年)/y1to5/y5to10/y10to20/y20plus。"
+    ]
+  },
+  "slices": [
+    {
+      "effectiveFrom": "2017-01-01",
+      "effectiveTo": null,
+      "sources": [
+        {
+          "title": "基本手当の所定給付日数",
+          "url": "https://www.hellowork.mhlw.go.jp/insurance/insurance_benefitdays.html",
+          "publisher": "厚生労働省（ハローワークインターネットサービス）・雇用保険法",
+          "license": "copyright-free-art13",
+          "accessedAt": "2026-07-03"
+        }
+      ],
+      "verifiedAt": "2026-07-03",
+      "values": {
+        "ippan": {
+          "under1y": null,
+          "y1to10": 90,
+          "y10to20": 120,
+          "y20plus": 150
+        },
+        "tokutei": {
+          "under30": {
+            "m6to1y": 90,
+            "y1to5": 90,
+            "y5to10": 120,
+            "y10to20": 180,
+            "y20plus": null
+          },
+          "a30to34": {
+            "m6to1y": 90,
+            "y1to5": 120,
+            "y5to10": 180,
+            "y10to20": 210,
+            "y20plus": 240
+          },
+          "a35to44": {
+            "m6to1y": 90,
+            "y1to5": 150,
+            "y5to10": 180,
+            "y10to20": 240,
+            "y20plus": 270
+          },
+          "a45to59": {
+            "m6to1y": 90,
+            "y1to5": 180,
+            "y5to10": 240,
+            "y10to20": 270,
+            "y20plus": 330
+          },
+          "a60to64": {
+            "m6to1y": 90,
+            "y1to5": 150,
+            "y5to10": 180,
+            "y10to20": 210,
+            "y20plus": 240
+          }
+        },
+        "konnan": {
+          "under1y": 150,
+          "under45": 300,
+          "a45to64": 360
+        }
+      }
+    }
+  ]
+} as const

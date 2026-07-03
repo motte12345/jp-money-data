@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "id": "jidosha-zei-shubetsuwari",
+    "name": "自動車税種別割（自家用乗用）",
+    "nameEn": "Automobile tax (kind-based, private passenger cars)",
+    "category": "tax",
+    "description": "排気量区分ごとの自動車税種別割の年額。2019年10月1日以降の初度登録は引下げ後税額が適用される。経年重課ルールを含む。",
+    "unit": "JPY_PER_YEAR",
+    "updateCycle": "on-revision",
+    "updateMonth": null,
+    "sources": [
+      {
+        "title": "自動車税種別割の税額",
+        "url": "https://www.mlit.go.jp/jidosha/jidosha_fr1_000076.html",
+        "publisher": "総務省・地方税法",
+        "license": "copyright-free-art13",
+        "accessedAt": "2026-07-03"
+      }
+    ],
+    "revisionHistory": [
+      {
+        "effectiveOn": "2019-10-01",
+        "summary": "2019年10月1日以降の初度登録車について税額を引下げ（新旧2税額の併存構造に）",
+        "sourceUrl": null
+      }
+    ],
+    "notes": [
+      "自家用乗用車のみ。営業用・貨物・三輪等は含まない。",
+      "経年重課はガソリン・LPG=13年超、ディーゼル=11年超で約15%増（HV・EVは対象外）。丸めは100円未満切り捨て。",
+      "初度登録年月で新旧いずれの税額が適用されるかが決まる。"
+    ]
+  },
+  "slices": [
+    {
+      "effectiveFrom": "2019-10-01",
+      "effectiveTo": null,
+      "sources": [
+        {
+          "title": "自動車税種別割の税額",
+          "url": "https://www.mlit.go.jp/jidosha/jidosha_fr1_000076.html",
+          "publisher": "総務省・地方税法",
+          "license": "copyright-free-art13",
+          "accessedAt": "2026-07-03"
+        }
+      ],
+      "verifiedAt": "2026-07-03",
+      "values": {
+        "brackets": [
+          { "maxCc": 1000, "post201910": 25000, "pre201909": 29500 },
+          { "maxCc": 1500, "post201910": 30500, "pre201909": 34500 },
+          { "maxCc": 2000, "post201910": 36000, "pre201909": 39500 },
+          { "maxCc": 2500, "post201910": 43500, "pre201909": 45000 },
+          { "maxCc": 3000, "post201910": 50000, "pre201909": 51000 },
+          { "maxCc": 3500, "post201910": 57000, "pre201909": 58000 },
+          { "maxCc": 4000, "post201910": 65500, "pre201909": 66500 },
+          { "maxCc": 4500, "post201910": 75500, "pre201909": 76500 },
+          { "maxCc": 6000, "post201910": 87000, "pre201909": 88000 },
+          { "maxCc": null, "post201910": 110000, "pre201909": 111000 }
+        ],
+        "surcharge": {
+          "gasolineYears": 13,
+          "dieselYears": 11,
+          "rate": 0.15,
+          "exemptFuels": ["hybrid", "ev"]
+        }
+      }
+    }
+  ]
+}

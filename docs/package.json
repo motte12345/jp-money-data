@@ -1,0 +1,31 @@
+{
+  "name": "jp-money-data-docs",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "sync": "node scripts/sync-data.mjs",
+    "predev": "node scripts/sync-data.mjs",
+    "dev": "vite-react-ssg dev",
+    "prebuild": "node scripts/sync-data.mjs && node scripts/generate-sitemap.mjs && node scripts/generate-ogp.mjs",
+    "build": "tsc -b && vite-react-ssg build",
+    "generate:ogp": "node scripts/generate-ogp.mjs",
+    "generate:sitemap": "node scripts/generate-sitemap.mjs",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-router-dom": "^6.30.3",
+    "vite-react-ssg": "^0.9.1-beta.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.12.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "sharp": "^0.34.5",
+    "typescript": "~5.9.3",
+    "vite": "^8.0.1"
+  }
+}

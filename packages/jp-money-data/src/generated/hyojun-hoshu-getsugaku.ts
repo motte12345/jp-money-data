@@ -1,0 +1,363 @@
+// このファイルは scripts/build-package.mjs が data/*.json から自動生成します。手で編集しないこと。
+// 生成物は .gitignore せずコミットする（差分レビュー可能にするため。設計書§11）。
+import type { Dataset } from '../core/types'
+import type { HyojunHoshuGetsugakuValues } from '../datasets/hyojun-hoshu-getsugaku'
+
+export const hyojunHoshuGetsugaku: Dataset<HyojunHoshuGetsugakuValues> = {
+  "meta": {
+    "id": "hyojun-hoshu-getsugaku",
+    "name": "標準報酬月額 等級表",
+    "nameEn": "Standard monthly remuneration grade table",
+    "category": "social-insurance",
+    "description": "健康保険の標準報酬月額 等級表（第1級58,000円〜第50級1,390,000円の50等級）と、厚生年金の等級枠（32等級・88,000〜650,000円）。",
+    "unit": "JPY_PER_MONTH",
+    "updateCycle": "on-revision",
+    "updateMonth": null,
+    "sources": [
+      {
+        "title": "厚生年金保険料額表・標準報酬月額",
+        "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/ryogaku/ryogakuhyo/index.html",
+        "publisher": "日本年金機構・健康保険法40条別表",
+        "license": "copyright-free-art13",
+        "accessedAt": "2026-07-04"
+      }
+    ],
+    "revisionHistory": [
+      {
+        "effectiveOn": "2020-09-01",
+        "summary": "健康保険に第50級（標準報酬月額1,390,000円）、厚生年金に第32級（650,000円）を追加",
+        "sourceUrl": null
+      }
+    ],
+    "notes": [
+      "健康保険は50等級（第1級58,000円〜第50級1,390,000円）。第1級の報酬月額下限は0（63,000円未満）、第50級の上限はなし（1,355,000円以上）。",
+      "厚生年金は健康保険の第4級〜第35級に対応する32等級（標準報酬月額88,000〜650,000円）。",
+      "報酬月額の区分は『lower 以上 upper 未満』。等級表は法改正時のみ変わる（毎年の料率改定とは別）。"
+    ]
+  },
+  "slices": [
+    {
+      "effectiveFrom": "2020-09-01",
+      "effectiveTo": null,
+      "sources": [
+        {
+          "title": "令和8年度 保険料額表（東京支部・標準報酬月額欄）",
+          "url": "https://www.kyoukaikenpo.or.jp/g7/cat330/sb3150/r08/r8ryougakuhyou3gatukara/",
+          "publisher": "全国健康保険協会（協会けんぽ）・健康保険法40条別表",
+          "license": "copyright-free-art13",
+          "accessedAt": "2026-07-04"
+        }
+      ],
+      "verifiedAt": "2026-07-04",
+      "values": {
+        "kenpo": [
+          {
+            "grade": 1,
+            "monthly": 58000,
+            "lower": 0,
+            "upper": 63000
+          },
+          {
+            "grade": 2,
+            "monthly": 68000,
+            "lower": 63000,
+            "upper": 73000
+          },
+          {
+            "grade": 3,
+            "monthly": 78000,
+            "lower": 73000,
+            "upper": 83000
+          },
+          {
+            "grade": 4,
+            "monthly": 88000,
+            "lower": 83000,
+            "upper": 93000
+          },
+          {
+            "grade": 5,
+            "monthly": 98000,
+            "lower": 93000,
+            "upper": 101000
+          },
+          {
+            "grade": 6,
+            "monthly": 104000,
+            "lower": 101000,
+            "upper": 107000
+          },
+          {
+            "grade": 7,
+            "monthly": 110000,
+            "lower": 107000,
+            "upper": 114000
+          },
+          {
+            "grade": 8,
+            "monthly": 118000,
+            "lower": 114000,
+            "upper": 122000
+          },
+          {
+            "grade": 9,
+            "monthly": 126000,
+            "lower": 122000,
+            "upper": 130000
+          },
+          {
+            "grade": 10,
+            "monthly": 134000,
+            "lower": 130000,
+            "upper": 138000
+          },
+          {
+            "grade": 11,
+            "monthly": 142000,
+            "lower": 138000,
+            "upper": 146000
+          },
+          {
+            "grade": 12,
+            "monthly": 150000,
+            "lower": 146000,
+            "upper": 155000
+          },
+          {
+            "grade": 13,
+            "monthly": 160000,
+            "lower": 155000,
+            "upper": 165000
+          },
+          {
+            "grade": 14,
+            "monthly": 170000,
+            "lower": 165000,
+            "upper": 175000
+          },
+          {
+            "grade": 15,
+            "monthly": 180000,
+            "lower": 175000,
+            "upper": 185000
+          },
+          {
+            "grade": 16,
+            "monthly": 190000,
+            "lower": 185000,
+            "upper": 195000
+          },
+          {
+            "grade": 17,
+            "monthly": 200000,
+            "lower": 195000,
+            "upper": 210000
+          },
+          {
+            "grade": 18,
+            "monthly": 220000,
+            "lower": 210000,
+            "upper": 230000
+          },
+          {
+            "grade": 19,
+            "monthly": 240000,
+            "lower": 230000,
+            "upper": 250000
+          },
+          {
+            "grade": 20,
+            "monthly": 260000,
+            "lower": 250000,
+            "upper": 270000
+          },
+          {
+            "grade": 21,
+            "monthly": 280000,
+            "lower": 270000,
+            "upper": 290000
+          },
+          {
+            "grade": 22,
+            "monthly": 300000,
+            "lower": 290000,
+            "upper": 310000
+          },
+          {
+            "grade": 23,
+            "monthly": 320000,
+            "lower": 310000,
+            "upper": 330000
+          },
+          {
+            "grade": 24,
+            "monthly": 340000,
+            "lower": 330000,
+            "upper": 350000
+          },
+          {
+            "grade": 25,
+            "monthly": 360000,
+            "lower": 350000,
+            "upper": 370000
+          },
+          {
+            "grade": 26,
+            "monthly": 380000,
+            "lower": 370000,
+            "upper": 395000
+          },
+          {
+            "grade": 27,
+            "monthly": 410000,
+            "lower": 395000,
+            "upper": 425000
+          },
+          {
+            "grade": 28,
+            "monthly": 440000,
+            "lower": 425000,
+            "upper": 455000
+          },
+          {
+            "grade": 29,
+            "monthly": 470000,
+            "lower": 455000,
+            "upper": 485000
+          },
+          {
+            "grade": 30,
+            "monthly": 500000,
+            "lower": 485000,
+            "upper": 515000
+          },
+          {
+            "grade": 31,
+            "monthly": 530000,
+            "lower": 515000,
+            "upper": 545000
+          },
+          {
+            "grade": 32,
+            "monthly": 560000,
+            "lower": 545000,
+            "upper": 575000
+          },
+          {
+            "grade": 33,
+            "monthly": 590000,
+            "lower": 575000,
+            "upper": 605000
+          },
+          {
+            "grade": 34,
+            "monthly": 620000,
+            "lower": 605000,
+            "upper": 635000
+          },
+          {
+            "grade": 35,
+            "monthly": 650000,
+            "lower": 635000,
+            "upper": 665000
+          },
+          {
+            "grade": 36,
+            "monthly": 680000,
+            "lower": 665000,
+            "upper": 695000
+          },
+          {
+            "grade": 37,
+            "monthly": 710000,
+            "lower": 695000,
+            "upper": 730000
+          },
+          {
+            "grade": 38,
+            "monthly": 750000,
+            "lower": 730000,
+            "upper": 770000
+          },
+          {
+            "grade": 39,
+            "monthly": 790000,
+            "lower": 770000,
+            "upper": 810000
+          },
+          {
+            "grade": 40,
+            "monthly": 830000,
+            "lower": 810000,
+            "upper": 855000
+          },
+          {
+            "grade": 41,
+            "monthly": 880000,
+            "lower": 855000,
+            "upper": 905000
+          },
+          {
+            "grade": 42,
+            "monthly": 930000,
+            "lower": 905000,
+            "upper": 955000
+          },
+          {
+            "grade": 43,
+            "monthly": 980000,
+            "lower": 955000,
+            "upper": 1005000
+          },
+          {
+            "grade": 44,
+            "monthly": 1030000,
+            "lower": 1005000,
+            "upper": 1055000
+          },
+          {
+            "grade": 45,
+            "monthly": 1090000,
+            "lower": 1055000,
+            "upper": 1115000
+          },
+          {
+            "grade": 46,
+            "monthly": 1150000,
+            "lower": 1115000,
+            "upper": 1175000
+          },
+          {
+            "grade": 47,
+            "monthly": 1210000,
+            "lower": 1175000,
+            "upper": 1235000
+          },
+          {
+            "grade": 48,
+            "monthly": 1270000,
+            "lower": 1235000,
+            "upper": 1295000
+          },
+          {
+            "grade": 49,
+            "monthly": 1330000,
+            "lower": 1295000,
+            "upper": 1355000
+          },
+          {
+            "grade": 50,
+            "monthly": 1390000,
+            "lower": 1355000,
+            "upper": null
+          }
+        ],
+        "kosei": {
+          "minMonthly": 88000,
+          "maxMonthly": 650000,
+          "grades": 32
+        }
+      }
+    }
+  ]
+} as const

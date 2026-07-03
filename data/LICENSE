@@ -1,0 +1,27 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+The dataset files in this directory (jp-money-data / data) are licensed under
+the Creative Commons Attribution 4.0 International License.
+
+You are free to share and adapt the material for any purpose, even
+commercially, provided you give appropriate credit ("jp-money-data" and a link
+to the project), indicate if changes were made, and do not suggest the
+licensor endorses you.
+
+Full legal code: https://creativecommons.org/licenses/by/4.0/legalcode
+Human-readable summary: https://creativecommons.org/licenses/by/4.0/
+
+---
+
+Source attribution / 出典について:
+
+Each dataset carries its own primary sources in `meta.sources[]` and
+`slices[].sources[]`. Most Japanese government sources are provided under the
+Public Data License 1.0 (PDL-1.0), which requires attribution and a statement
+that the material has been edited/adapted, and prohibits presenting the data
+as if it were an official government work. See NOTICE.md for the required
+attribution format and the full source list.
+
+本データは各 dataset の meta.sources に記載した一次資料を基に編集・加工して
+作成したものであり、出典元機関が作成・公表したものではありません。
+再配布・引用時は NOTICE.md の出典表記に従ってください。

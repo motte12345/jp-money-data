@@ -1,0 +1,113 @@
+// このファイルは scripts/build-package.mjs が data/*.json から自動生成します。手で編集しないこと。
+// 生成物は .gitignore せずコミットする（差分レビュー可能にするため。設計書§11）。
+import type { Dataset } from '../core/types'
+import type { TaishokuShotokuZeiValues } from '../datasets/taishoku-shotoku-zei'
+
+export const taishokuShotokuZei: Dataset<TaishokuShotokuZeiValues> = {
+  "meta": {
+    "id": "taishoku-shotoku-zei",
+    "name": "退職所得の税（控除・所得税速算表・住民税）",
+    "nameEn": "Retirement income taxation (deduction, income tax brackets, resident tax)",
+    "category": "tax",
+    "description": "退職金にかかる退職所得控除・所得税速算表・復興特別所得税・住民税（市民税6%/県民税4%を分離）・短期退職手当等ルール。",
+    "unit": "MIXED",
+    "updateCycle": "on-revision",
+    "updateMonth": null,
+    "sources": [
+      {
+        "title": "No.1420 退職金を受け取ったとき（退職所得）",
+        "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1420.htm",
+        "publisher": "国税庁・所得税法",
+        "license": "copyright-free-art13",
+        "accessedAt": "2026-07-03"
+      },
+      {
+        "title": "No.2260 所得税の税率",
+        "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2260.htm",
+        "publisher": "国税庁・所得税法",
+        "license": "copyright-free-art13",
+        "accessedAt": "2026-07-03"
+      }
+    ],
+    "revisionHistory": [
+      {
+        "effectiveOn": "2022-01-01",
+        "summary": "短期退職手当等（役員等以外で勤続5年以下）の1/2課税制限を導入（控除後300万円超部分）",
+        "sourceUrl": null
+      }
+    ],
+    "notes": [
+      "退職所得控除: 勤続20年以下=40万円×年（最低80万円）、20年超=800万円+70万円×(年-20)。障害起因退職は+100万円。勤続年数は1年未満切り上げ。",
+      "課税退職所得=(退職金-控除)×1/2（1,000円未満切り捨て）。特定役員退職手当等（役員で勤続5年以下）は1/2非適用。短期退職手当等（非役員で勤続5年以下）は控除後300万円超部分に1/2非適用。",
+      "所得税=速算表×1.021（復興特別所得税込み）。",
+      "住民税は市町村民税6%・道府県民税4%を別々に課税退職所得へ乗じ、各々100円未満を切り捨てて合算する（合計10%だが一括×10%とは最大99円ずれる）。"
+    ]
+  },
+  "slices": [
+    {
+      "effectiveFrom": "2022-01-01",
+      "effectiveTo": null,
+      "sources": [
+        {
+          "title": "No.1420 退職金を受け取ったとき（退職所得）",
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1420.htm",
+          "publisher": "国税庁・所得税法",
+          "license": "copyright-free-art13",
+          "accessedAt": "2026-07-03"
+        }
+      ],
+      "verifiedAt": "2026-07-03",
+      "values": {
+        "kojo": {
+          "under20PerYear": 400000,
+          "min": 800000,
+          "over20Base": 8000000,
+          "over20PerYear": 700000,
+          "disabilityBonus": 1000000
+        },
+        "incomeTaxBrackets": [
+          {
+            "upTo": 1949000,
+            "rate": 0.05,
+            "deduction": 0
+          },
+          {
+            "upTo": 3299000,
+            "rate": 0.1,
+            "deduction": 97500
+          },
+          {
+            "upTo": 6949000,
+            "rate": 0.2,
+            "deduction": 427500
+          },
+          {
+            "upTo": 8999000,
+            "rate": 0.23,
+            "deduction": 636000
+          },
+          {
+            "upTo": 17999000,
+            "rate": 0.33,
+            "deduction": 1536000
+          },
+          {
+            "upTo": 39999000,
+            "rate": 0.4,
+            "deduction": 2796000
+          },
+          {
+            "upTo": null,
+            "rate": 0.45,
+            "deduction": 4796000
+          }
+        ],
+        "reconstructionRate": 0.021,
+        "shiminZeiRate": 0.06,
+        "kenminZeiRate": 0.04,
+        "shortServiceHalfCap": 3000000,
+        "shortServiceYears": 5
+      }
+    }
+  ]
+} as const

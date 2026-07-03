@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jp-money-data.com/schemas/dataset.schema.json",
+  "title": "jp-money-data dataset",
+  "description": "全データセット共通の meta + slices スキーマ（設計書§9.1）。values の中身は個別 values スキーマ（Phase 2）と TS 型で担保する。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["meta", "slices"],
+  "properties": {
+    "meta": { "$ref": "#/$defs/meta" },
+    "slices": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/slice" }
+    }
+  },
+  "$defs": {
+    "date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "sourceLicense": {
+      "type": "string",
+      "enum": [
+        "PDL-1.0",
+        "copyright-free-art13",
+        "permission-required",
+        "quasi-govt-quote"
+      ]
+    },
+    "sourceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "url", "publisher", "license", "accessedAt"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "minLength": 1 },
+        "publisher": { "type": "string", "minLength": 1 },
+        "license": { "$ref": "#/$defs/sourceLicense" },
+        "accessedAt": { "$ref": "#/$defs/date" }
+      }
+    },
+    "revision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["effectiveOn", "summary", "sourceUrl"],
+      "properties": {
+        "effectiveOn": { "$ref": "#/$defs/date" },
+        "summary": { "type": "string", "minLength": 1 },
+        "sourceUrl": { "type": ["string", "null"] }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "nameEn",
+        "category",
+        "description",
+        "unit",
+        "updateCycle",
+        "updateMonth",
+        "sources",
+        "revisionHistory",
+        "notes"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+        "name": { "type": "string", "minLength": 1 },
+        "nameEn": { "type": "string", "minLength": 1 },
+        "category": {
+          "type": "string",
+          "enum": [
+            "tax",
+            "compulsory-insurance",
+            "social-insurance",
+            "labor",
+            "subsidy"
+          ]
+        },
+        "description": { "type": "string", "minLength": 1 },
+        "unit": {
+          "type": "string",
+          "enum": [
+            "JPY",
+            "JPY_PER_YEAR",
+            "JPY_PER_MONTH",
+            "JPY_PER_DAY",
+            "RATE",
+            "DAY",
+            "MIXED"
+          ]
+        },
+        "updateCycle": { "type": "string", "enum": ["yearly", "on-revision"] },
+        "updateMonth": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "maximum": 12
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/sourceRef" }
+        },
+        "revisionHistory": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/revision" }
+        },
+        "notes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "slice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["effectiveFrom", "effectiveTo", "sources", "verifiedAt", "values"],
+      "properties": {
+        "effectiveFrom": { "$ref": "#/$defs/date" },
+        "effectiveTo": {
+          "oneOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }]
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/sourceRef" }
+        },
+        "verifiedAt": { "$ref": "#/$defs/date" },
+        "values": { "type": "object" }
+      }
+    }
+  }
+}

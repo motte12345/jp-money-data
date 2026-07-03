@@ -1,0 +1,28 @@
+{
+  "name": "jp-money-data-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "日本の生活マネー制度データOSS（出典・改定履歴つき機械可読データセット）のモノレポ",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "generate": "node scripts/build-package.mjs",
+    "build": "npm run generate && npm -w jp-money-data run build",
+    "typecheck": "npm run generate && npm -w jp-money-data run typecheck",
+    "pretest": "npm run generate",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}
