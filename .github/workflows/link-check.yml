@@ -1,0 +1,19 @@
+name: Link check (sources)
+
+on:
+  schedule:
+    - cron: '0 0 1 * *' # 毎月1日 00:00 UTC（09:00 JST）
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Check source URLs are alive and flag stale verifiedAt
+        run: node scripts/link-check.mjs
