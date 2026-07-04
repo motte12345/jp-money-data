@@ -4,6 +4,13 @@
   "description": "日本の生活マネー制度データ（自賠責・軽自動車税・標準報酬月額・雇用保険など）を出典・改定履歴つきの JSON + TypeScript 型で提供する OSS。Japanese money/social-insurance/tax parameters as machine-readable data with sources and revision history.",
   "keywords": ["japan", "japanese", "tax", "social-insurance", "dataset", "open-data", "json"],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/motte12345/jp-money-data.git",
+    "directory": "packages/jp-money-data"
+  },
+  "homepage": "https://jp-money-data.com",
+  "bugs": "https://github.com/motte12345/jp-money-data/issues",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
