@@ -3,7 +3,7 @@
 このプロジェクトの変更履歴（[Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) 形式）。
 制度改定の反映はここに記録し、npm のバージョン（改定=minor、誤植修正=patch）と対応させる。
 
-## [Unreleased]
+## [0.1.0] - 2026-07-05
 
 ### Added
 
